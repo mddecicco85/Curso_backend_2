@@ -8,6 +8,7 @@ import passport from "passport"; //Acá también lo vamos a usar.
 
 const sessionRouter = Router();
 
+sessionRouter.get("/viewLogin", (req, res) => res.render("templates/login"));
 sessionRouter.post("/login", passport.authenticate("login"), login);
 sessionRouter.post("/register", passport.authenticate("register"), register); //Agregué el middleware.
 
