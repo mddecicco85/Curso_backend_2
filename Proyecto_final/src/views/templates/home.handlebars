@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  {{! mt-5 indica que es un contenedor grande }}
+  <h1>Productos</h1>
+  <div class="row">
+    {{! quiero que los productos aparezcan uno al lado del otro, en un row }}
+    {{#each prods.docs}}
+      {{! El paginate devuelve todos los productos en un .docs }}
+      <div class="col-md-4 mb-4">
+        {{! mb indica tamaño }}
+        <div class="card h-80 shadows-md">
+          <div class="card-body">
+            <h5 class="card-tile">{{this.title}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <p class="card-text">${{this.price}}</p>
+            <a href="/api/products/{{this._id}}"><button>Ver producto</button></a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  {{! Paginación }}
+  <nav aria-label="Page Navigation">
+    <ul class="pagination justify-content-center">
+      {{! ul: unordered list }}
+      {{#if prods.hasPrevPage}}
+        <li class="page-item">
+          {{! li: list item }}
+          <a
+            class="page-link"
+            href="?page={{prods.prevPage}}&limit={{prods.limit}}" {{!-- Conserva el limit al refrescar --}}
+            aria-label="Previous"
+          >
+            <span aria-hidden="true">&laquo;</span>
+            {{! &laquo; indica etiqueta previa. 
+            Creo que es para que aparezca el botón de la flecha para ir a la pág anterior}}
+          </a>
+          {{! No estoy en un ciclo each (no pongo this) }}
+        </li>
+      {{/if}}
+      {{#each prods.pageNumbers}}
+        {{! Hago each porque, como no sé cuál es la última página, tengo que hacerlo para todas. }}
+        <li class="page-item {{#if this.isCurrent}} active {{/if}}">
+            {{!-- Esto es para que coloree el botón de la página actual (la que estoy viendo) --}}
+            <a class="page-link" href="?page={{this.number}}&limit={{this.limit}}">{{this.number}}</a>
+            {{!-- Estos son los botones con los números. --}}
+        </li>
+      {{/each}}
+      {{#if prods.hasNextPage}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{prods.nextPage}}&limit={{prods.limit}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span></a> {{!-- &raquo; referencia a la página a la derecha --}}
+      </li>
+      {{/if}}
+    </ul>
+
+  </nav>
+</div>

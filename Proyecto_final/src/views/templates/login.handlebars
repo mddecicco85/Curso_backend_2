@@ -1,0 +1,33 @@
+<div class="container d-flex justify-content-center align-items-center vh-120">
+  <div class="card p-4 shadow-sm cardLogin">
+    <h3 class="text-center">Log in</h3>
+    <form action="/api/sessions/login" id="loginForm" method="post">
+      {{! Hace el sessionRouter.post('/login') }}
+      <div class="mb-3">
+        <label for="email" class="form-label">User</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="user@user.com"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">
+        Sign in
+      </button>
+    </form>
+    <div class="text-center mt-3">
+      <button class="btn btn-light w-100">
+        <a href="/api/sessions/github">Log in with GitHub</a>
+      </button>
+      <label></label>
+      <br />
+      <a href="/viewRegister">Don't have an account? Sign up</a>
+    </div>
+  </div>
+</div>
